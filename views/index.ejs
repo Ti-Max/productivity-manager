@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <title>Productivity manager</title>
+</head>
+<body>
+
+    <center>
+        <h1>Productivity manager</h1>
+        <h2>Welcome to the productivity manager,  <%= name %></h2>  
+        You have studied <span id="user-minutes"><%= time %></span> minutes in total
+        <br>
+        <br>
+        <br>
+        <br>
+            How long did you study today?
+        <br>
+        <input placeholder="minutes" id="minutes" onkeypress="return onlyNumberKey(event)"></input>
+        <button onclick="SublimMinutes();">Submit</button>
+    </center>
+    <button id="logout" onclick="logout();">
+        Log out
+    </button>
+    <br>
+    <br>
+
+    <center>
+        <h2>Lederboard</h2>
+        <br>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Minutes</th>
+            </tr>
+            <% for (var i = 0; i < users.length; i++) { %>
+                <tr>
+                    <td><%= users[i].name %></td>
+                    <td><%= users[i].time %></td>
+                </tr>
+            <% } %>
+        </table>
+    </center>
+</body>
+<script>
+    function logout(){
+        window.location.href = "logout";
+    }
+    function SublimMinutes(){
+        let minutes = document.getElementById('minutes').value;
+
+        fetch('/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: '<%= name %>',
+                minutes: minutes
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            //Update the user's minutes
+            document.getElementById('user-minutes').innerHTML = data.totalMinutes;
+        })
+        .catch(err => console.log(err));
+    }
+
+    function onlyNumberKey(evt) {
+          
+        // Only ASCII character in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+</script>
+</html>
