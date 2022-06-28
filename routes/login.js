@@ -23,7 +23,6 @@ router.post('/login', async function(req, res, next) {
       else {
 
         req.session.user = req.body.username;
-        console.log("From login.js: " + req.session.user);
         // User is logged in
         res.status(200).json({});
       }

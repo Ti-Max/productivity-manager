@@ -19,7 +19,6 @@ router.get('/', function(req, res, next) {
         result2.forEach(element => {
           users.push({name: element.name, time: element.timeLearningTotal});
         });
-        console.log(users);
         res.render('index', { name: req.session.user, time: result[0].timeLearningTotal, users:users });
       });
     });

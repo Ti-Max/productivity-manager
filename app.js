@@ -1,11 +1,13 @@
 const express = require('express');
 const session = require('express-session');
-// const cookieParser = require('cookie-parser');
 const path = require('path');
+
+// Routes
 const indexRouter = require('./routes/index');
-const othersRouter = require('./routes/others');
 const submitRouter = require('./routes/submitHourse');
-const login = require('./routes/login');
+const loginRouter = require('./routes/login');
+const interactive3dRouter = require('./routes/interactive3d');
+
 const app = express();
 const port = 8000;
 
@@ -13,7 +15,6 @@ const port = 8000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); 
 
-// app.use(cookieParser());
 app.use(session({
   key: 'user_id',
   secret: 'ssshhhhh',
@@ -29,9 +30,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(indexRouter);
 app.use(submitRouter);
-app.use(othersRouter);
-app.use(login);
+app.use(loginRouter);
+app.use(interactive3dRouter);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`App listening on port ${port}`);
 });
