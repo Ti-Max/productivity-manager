@@ -1,7 +1,6 @@
 # productivity-manager
 
-qwer
-ytrew
+q
 sdfgsd
 
 s
