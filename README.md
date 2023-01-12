@@ -1,13 +1,4 @@
 # productivity-manager
+this is text from old master branch
 
-qwer
-ytrew
-sdfgsf
-
-s
-hsf
-gh
-s
-fgh
-
-sfd
+testing old master branch
